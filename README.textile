@@ -4,8 +4,8 @@ A collection of projects in python looking at semantics. Mostly orientated aroun
 
 h2. Complete
 
-* Vector space search - "http://www.joesniff.co.uk/projects/building-a-vector-space-search-engine-in-python.html":http://www.joesniff.co.uk/projects/building-a-vector-space-search-engine-in-python.html
-* Latent semantic analysis - "http://www.joesniff.co.uk/projects/latent-semantic-analysis-in-python.html":http://www.joesniff.co.uk/projects/latent-semantic-analysis-in-python.html
+* Vector space search - "http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html":http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html
+* Latent semantic analysis - "http://blog.josephwilk.net/projects/latent-semantic-analysis-in-python.html":http://blog.josephwilk.net/projects/latent-semantic-analysis-in-python.html
 
 h2. In-progress
 
