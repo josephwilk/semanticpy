@@ -1,38 +1,40 @@
-#http://tartarus.org/~martin/PorterStemmer/python.txt
-from PorterStemmer import PorterStemmer
+from porter_stemmer import PorterStemmer
+import util
 
 class Parser:
+    STOP_WORDS_FILE = 'data/english.stop'
 
 	#A processor for removing the commoner morphological and inflexional endings from words in English
-	stemmer=None
+    stemmer = None
+    stopwords = []
 
-	stopwords=[]
+    def __init__(self,):
+    	self.stemmer = PorterStemmer()
+    	self.stopwords = open(Parser.STOP_WORDS_FILE, 'r').read().split()
 
-	def __init__(self,):
-		self.stemmer = PorterStemmer()
+    def tokenise_and_remove_stop_words(self, document_list):
+    	vocabulary_string = " ".join(document_list)
+                
+    	tokenised_vocabulary_list = self._tokenise(vocabulary_string)
+    	clean_word_list = self._remove_stop_words(tokenised_vocabulary_list)
+        unqiue_clean_word_list = util.removeDuplicates(clean_word_list)
+        return unqiue_clean_word_list
 
-		#English stopwords from ftp://ftp.cs.cornell.edu/pub/smart/english.stop
-		self.stopwords = open('english.stop', 'r').read().split()
-
-
-	def clean(self, string):
-		""" remove any nasty grammar tokens from string """
-		string = string.replace(".","")
-		string = string.replace("\s+"," ")
-		string = string.lower()
-		return string
-	
-
-	def removeStopWords(self,list):
-		""" Remove common words which have no search value """
-		return [word for word in list if word not in self.stopwords ]
+    def _remove_stop_words(self, list):
+    	""" Remove common words which have no search value """
+    	return [word for word in list if word not in self.stopwords ]
 
 
-	def tokenise(self, string):
-		""" break string up into tokens and stem words """
-		string = self.clean(string)
-		words = string.split(" ")
+    def _tokenise(self, string):
+    	""" break string up into tokens and stem words """
+    	string = self._clean(string)
+    	words = string.split(" ")
 		
-		return [self.stemmer.stem(word,0,len(word)-1) for word in words]
+    	return [self.stemmer.stem(word, 0, len(word)-1) for word in words]
 
-
+    def _clean(self, string):
+    	""" remove any nasty grammar tokens from string """
+    	string = string.replace(".","")
+    	string = string.replace("\s+"," ")
+    	string = string.lower()
+    	return string

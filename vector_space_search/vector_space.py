@@ -35,13 +35,7 @@ class VectorSpace:
 	def getVectorKeywordIndex(self, documentList):
 		""" create the keyword associated to the position of the elements within the document vectors """
 
-		#Mapped documents into a single word string	
-		vocabularyString = " ".join(documentList)
-			
-		vocabularyList = self.parser.tokenise(vocabularyString)
-		#Remove common words which have no search value
-		vocabularyList = self.parser.removeStopWords(vocabularyList)
-		uniqueVocabularyList = util.removeDuplicates(vocabularyList)
+		unique_vocabulary_list = self.parser.tokenise_and_remove_stop_words(documentList)
 		
 		vectorIndex={}
 		offset=0
