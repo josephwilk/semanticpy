@@ -99,26 +99,3 @@ class LSA:
 
 		else:
 			print "dimension reduction cannot be greater than %s" % rows
-
-
-if __name__ == '__main__':
-
-	#Example document-term matrix
-	# Vector dimensions: good, pet, hat, make, dog, cat, poni, fine, disabl
-	matrix=[[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0], 
-		[0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0], 
-		[1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0], 
-		[0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
-
-	#Create
-	lsa = LSA(matrix)
-	print lsa
-
-	#Prepare
-	lsa.tfidfTransform()
-	print lsa
-	
-	#Perform
-	lsa.lsaTransform()
-	print lsa
-

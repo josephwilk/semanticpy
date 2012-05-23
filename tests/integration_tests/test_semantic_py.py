@@ -1,5 +1,6 @@
 from unittest import TestCase
 from vector_space_search.vector_space import VectorSpace
+from vector_space_search.lsa import LSA
 from nose.tools import *
 from pprint import pprint
 
@@ -16,3 +17,23 @@ class TestSemanticPy(TestCase):
         vectorSpace = VectorSpace(self.documents)
 
         eq_(vectorSpace.related(0), [1.0000000000000002, 0.5773502691896258, 0.2886751345948129, 0.2581988897471611])
+        
+    def it_should_do_lsa_magic(self):
+    	#Example document-term matrix
+    	# Vector dimensions: good, pet, hat, make, dog, cat, poni, fine, disabl
+    	matrix=[[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0], 
+    		[0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0], 
+    		[1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0], 
+    		[0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+
+    	#Create
+    	lsa = LSA(matrix)
+    	print lsa
+
+    	#Prepare
+    	lsa.tfidfTransform()
+    	print lsa
+	
+    	#Perform
+    	lsa.lsaTransform()
+    	print lsa
