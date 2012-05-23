@@ -15,6 +15,9 @@ class Parser:
         self.stopwords = stopwords_io_stream.read().split()
 
     def tokenise_and_remove_stop_words(self, document_list):
+        if not document_list:
+          return []
+          
     	vocabulary_string = " ".join(document_list)
                 
     	tokenised_vocabulary_list = self._tokenise(vocabulary_string)

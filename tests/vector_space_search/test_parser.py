@@ -42,4 +42,4 @@ class TestParser(TestCase):
     
     parsed_words = parser.tokenise_and_remove_stop_words([])
     
-    eq_(parsed_words, [''])
+    eq_(parsed_words, [])
