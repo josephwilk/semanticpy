@@ -1,5 +1,4 @@
 from porter_stemmer import PorterStemmer
-import util
 
 class Parser:
     STOP_WORDS_FILE = 'data/english.stop'
@@ -17,8 +16,7 @@ class Parser:
                 
     	tokenised_vocabulary_list = self._tokenise(vocabulary_string)
     	clean_word_list = self._remove_stop_words(tokenised_vocabulary_list)
-        unqiue_clean_word_list = util.removeDuplicates(clean_word_list)
-        return unqiue_clean_word_list
+        return clean_word_list
 
     def _remove_stop_words(self, list):
     	""" Remove common words which have no search value """
