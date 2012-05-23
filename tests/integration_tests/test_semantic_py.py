@@ -3,7 +3,7 @@ from vector_space_search.vector_space import VectorSpace
 from nose.tools import *
 from pprint import pprint
 
-class TestVectorSpace(TestCase):
+class TestSemanticPy(TestCase):
     def setUp(self):
         self.documents = ["The cat in the hat disabled", "A cat is a fine pet ponies.", "Dogs and cats make good pets.","I haven't got a hat."]
     

@@ -2,14 +2,12 @@ from scipy import linalg,array,dot,mat
 from math import *
 from pprint import pprint
 
-
 class LSA:
 	""" Latent Semantic Analysis(LSA). 
 	    Apply transforms to a document-term matrix to bring out latent relationships. 
 	    These are found by analysing relationships between the documents and the terms they 
 	    contain.
 	"""
-
 
 	def __init__(self, matrix):
 		self.matrix = array(matrix)
