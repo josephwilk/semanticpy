@@ -16,18 +16,13 @@ class VectorSpace:
 	separate term. If a term occurs in the document, then the value in the vector is non-zero.
 	"""
 
-	#Collection of document term vectors
-	document_vectors = []
+	collection_of_document_term_vectors = []
+	vector_index_to_keyword_mapping = []
 
-	#Mapping of vector index to keyword
-	vector_keyword_index=[]
-
-	#Tidies terms
 	parser=None
 
-
 	def __init__(self, documents=[]):
-		self.document_vectors=[]
+		self.collection_of_document_term_vectors=[]
 		self.parser = Parser()
 		if(len(documents)>0):
 			self.build(documents)
@@ -37,12 +32,12 @@ class VectorSpace:
 		""" Create the vector space for the passed document strings """
 		self.vector_keyword_index = self.get_vector_keyword_index(documents)
 
-		self.document_vectors = [self.make_vector(document) for document in documents]
+		self.collection_of_document_term_vectors = [self.make_vector(document) for document in documents]
 
 
-	def get_vector_keyword_index(self, documentList):
+	def get_vector_keyword_index(self, document_list):
 		""" create the keyword associated to the position of the elements within the document vectors """
-		vocabulary_list = self.parser.tokenise_and_remove_stop_words(documentList)
+		vocabulary_list = self.parser.tokenise_and_remove_stop_words(document_list)
         unique_vocabulary_list = self._remove_duplicates(vocabulary_list)
 		
 		vectorIndex={}
@@ -54,28 +49,28 @@ class VectorSpace:
 		return vectorIndex  #(keyword:position)
 
 
-	def make_vector(self, wordString):
+	def make_vector(self, word_string):
 		""" @pre: unique(vectorIndex) """
 
 		#Initialise vector with 0's
 		vector = [0] * len(self.vector_keyword_index)
 
-		word_list = self.parser.tokenise_and_remove_stop_words(documentList)
+		word_list = self.parser.tokenise_and_remove_stop_words(word_string)
 
 		for word in wordList:
 			vector[self.vector_keyword_index[word]] += 1; #Use simple Term Count Model
 		return vector
 
 
-	def build_query_vector(self, termList):
+	def build_query_vector(self, term_list):
 		""" convert query string into a term vector """
-		query = self.make_vector(" ".join(termList))
+		query = self.make_vector(" ".join(term_list))
 		return query
 
 
-	def related(self,documentId):
+	def related(self,document_id):
 		""" find documents that are related to the document indexed by passed Id within the document Vectors"""
-		ratings = [util.cosine(self.document_vectors[documentId], documentVector) for documentVector in self.document_vectors]
+		ratings = [util.cosine(self.collection_of_document_term_vectors[document_id], document_vector) for document_vector in self.collection_of_document_term_vectors]
 		ratings.sort(reverse=True)
 		return ratings
 
@@ -84,11 +79,9 @@ class VectorSpace:
 		""" search for documents that match based on a list of terms """
 		queryVector = self.build_query_vector(searchList)
 
-		ratings = [util.cosine(queryVector, documentVector) for documentVector in self.document_vectors]
+		ratings = [util.cosine(queryVector, documentVector) for documentVector in self.collection_of_document_term_vectors]
 		ratings.sort(reverse=True)
 		return ratings
-        
-    
 
     def _remove_duplicates(list):
         """ remove duplicates from a list """
