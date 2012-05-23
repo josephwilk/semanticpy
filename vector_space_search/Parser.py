@@ -3,13 +3,16 @@ from porter_stemmer import PorterStemmer
 class Parser:
     STOP_WORDS_FILE = 'data/english.stop'
 
-	#A processor for removing the commoner morphological and inflexional endings from words in English
     stemmer = None
     stopwords = []
 
-    def __init__(self,):
+    def __init__(self, stopwords_io_stream = None):
     	self.stemmer = PorterStemmer()
-    	self.stopwords = open(Parser.STOP_WORDS_FILE, 'r').read().split()
+        
+        if(not stopwords_io_stream):
+    	  stopwords_io_stream = open(Parser.STOP_WORDS_FILE, 'r')
+
+        self.stopwords = stopwords_io_stream.read().split()
 
     def tokenise_and_remove_stop_words(self, document_list):
     	vocabulary_string = " ".join(document_list)
