@@ -1,6 +1,6 @@
 from unittest import TestCase
-from vector_space_search.vector_space import VectorSpace
-from vector_space_search.lsa import LSA
+from semanticpy.vector_space_search.vector_space import VectorSpace
+from semanticpy.vector_space_search.lsa import LSA
 from nose.tools import *
 from pprint import pprint
 
