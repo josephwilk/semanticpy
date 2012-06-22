@@ -5,6 +5,14 @@ import numpy
 
 class TestLSA(TestCase):
    """ """
+   EPSILON = 4.90815310617e-09
+
+   @classmethod
+   def same(self, matrix1, matrix2):
+    difference = matrix1 - matrix2
+    max = numpy.max(difference)
+    return (max <= TestLSA.EPSILON)
+
    def it_should_do_tfidf_test(self):
      matrix = [[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
                [0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0],
@@ -21,8 +29,7 @@ class TestLSA(TestCase):
      lsa = LSA(matrix)
      lsa.tfidfTransform()
 
-     eq_(numpy.intersect1d(lsa.matrix,expected), [0])
-
+     eq_(TestLSA.same(lsa.matrix, expected), True)
 
    def it_should_do_lsa_test(self):
      matrix = [[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
@@ -39,7 +46,4 @@ class TestLSA(TestCase):
      lsa = LSA(matrix)
      lsa.lsaTransform()
 
-     #eq_(lsa.matrix == expected, [])
-     eq_(lsa.matrix, [])
-
-     eq_(numpy.intersect1d(lsa.matrix,expected), numpy.array([]))
+     eq_(TestLSA.same(lsa.matrix, expected), True)
