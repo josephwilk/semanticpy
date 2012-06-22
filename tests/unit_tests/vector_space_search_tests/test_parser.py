@@ -1,5 +1,5 @@
 from unittest import TestCase
-from vector_space_search.parser import Parser
+from semanticpy.vector_space_search.parser import Parser
 from nose.tools import *
 
 class TestParser(TestCase):
