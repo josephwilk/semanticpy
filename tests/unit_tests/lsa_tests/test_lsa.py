@@ -1,5 +1,5 @@
 from unittest import TestCase
-from semanticpy.vector_space_search.lsa import LSA
+from semanticpy.lsa.lsa import LSA
 from nose.tools import *
 
 class TestLSA(TestCase):

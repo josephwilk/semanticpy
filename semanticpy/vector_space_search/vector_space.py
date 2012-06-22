@@ -1,5 +1,5 @@
 from pprint import pprint
-from parser import Parser
+from semanticpy.parser import Parser
 from sets import Set
 import sys
 

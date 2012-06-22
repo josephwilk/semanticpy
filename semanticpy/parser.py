@@ -3,7 +3,7 @@ from porter_stemmer import PorterStemmer
 import os
 
 class Parser:
-    STOP_WORDS_FILE = '%s/../../data/english.stop' %  os.path.dirname(os.path.realpath(__file__))
+    STOP_WORDS_FILE = '%s/../data/english.stop' %  os.path.dirname(os.path.realpath(__file__))
 
     stemmer = None
     stopwords = []

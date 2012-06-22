@@ -1,2 +1,1 @@
-from vector_space_search.vector_space import VectorSpace
-from vector_space_search.lsa import LSA
+
