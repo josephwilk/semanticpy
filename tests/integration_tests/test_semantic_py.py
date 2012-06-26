@@ -1,6 +1,6 @@
 from unittest import TestCase
 from semanticpy.vector_space_search.vector_space import VectorSpace
-from semanticpy.lsa.lsa import LSA
+from semanticpy.transform.lsa import LSA
 from nose.tools import *
 
 class TestSemanticPy(TestCase):

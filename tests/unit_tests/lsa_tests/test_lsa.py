@@ -1,5 +1,5 @@
 from unittest import TestCase
-from semanticpy.lsa.lsa import LSA
+from semanticpy.transform.lsa import LSA
 from nose.tools import *
 import numpy
 
@@ -12,24 +12,6 @@ class TestLSA(TestCase):
     difference = matrix1 - matrix2
     max = numpy.max(difference)
     return (max <= TestLSA.EPSILON)
-
-   def it_should_do_tfidf_test(self):
-     matrix = [[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
-               [0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0],
-               [1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0],
-               [0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
-
-     expected = [[ 0.        ,  0.        ,  0.23104906,  0.        ,  0.        , 0.09589402,  0.        ,  0.        ,  0.46209812],
-                 [ 0.        ,  0.1732868 ,  0.        ,  0.        ,  0.        , 0.07192052,  0.34657359,  0.34657359,  0.        ],
-                 [ 0.27725887,  0.13862944,  0.        ,  0.27725887,  0.27725887, 0.05753641,  0.        ,  0.        ,  0.        ],
-                 [ 0.        ,  0.        ,  0.69314718,  0.        ,  0.        , 0.        ,  0.        ,  0.        ,  0.        ]]
-
-     expected = numpy.array(expected)
-
-     lsa = LSA(matrix)
-     lsa.tfidfTransform()
-
-     eq_(TestLSA.same(lsa.matrix, expected), True)
 
    def it_should_do_lsa_test(self):
      matrix = [[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
@@ -44,6 +26,6 @@ class TestLSA(TestCase):
 
      expected = numpy.array(expected)
      lsa = LSA(matrix)
-     lsa.lsaTransform()
+     lsa.transform()
 
      eq_(TestLSA.same(lsa.matrix, expected), True)
