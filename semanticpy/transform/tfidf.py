@@ -8,7 +8,7 @@ class Tfidf(Transform):
         self.document_total = len(self.matrix)
 
 
-    def transform(self):
+    def transform(self,):
         """ Apply TermFrequency(tf)*inverseDocumentFrequency(idf) for each matrix element.
         This evaluates how important a word is to a document in a corpus
 
@@ -19,19 +19,16 @@ class Tfidf(Transform):
         """
 
         rows,cols = self.matrix.shape
-        transformed_matrix = self.matrix
 
         for row in xrange(0, rows): #For each document
             word_total = reduce(lambda x, y: x+y, self.matrix[row] )
 
             for col in xrange(0,cols): #For each term
                 #For consistency ensure all self.matrix values are floats
-                transformed_matrix[row][col] = float(self.matrix[row][col])
+                self.matrix[row][col] = float(self.matrix[row][col])
 
-                if transformed_matrix[row][col] != 0:
-                    transformed_matrix[row][col] = self.__tf_idf(row, col, word_total)
-
-        return transformed_matrix
+                if self.matrix[row][col] != 0:
+                    self.matrix[row][col] = self.__tf_idf(row, col, word_total)
 
 
     def __get_term_document_occurences(self, col):

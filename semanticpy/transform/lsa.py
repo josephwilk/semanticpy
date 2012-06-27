@@ -26,9 +26,9 @@ class LSA(Transform):
 				sigma[index] = 0
 
 			#Reconstruct MATRIX'
-			transformed_matrix = dot(dot(u, linalg.diagsvd(sigma, len(self.matrix), len(vt))) ,vt)
+			reconstructedMatrix = dot(dot(u, linalg.diagsvd(sigma, len(self.matrix), len(vt))) ,vt)
 
-			return transformed_matrix
+			self.matrix = reconstructedMatrix
 
 		else:
 			print "dimension reduction cannot be greater than %s" % rows
