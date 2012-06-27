@@ -1,0 +1,19 @@
+h1. SemanticPy
+
+A collection of projects in python looking at semantics. Mostly orientated around search.
+
+h2. Complete
+
+* Vector space search - "http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html":http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html
+* Latent semantic analysis - "http://blog.josephwilk.net/projects/latent-semantic-analysis-in-python.html":http://blog.josephwilk.net/projects/latent-semantic-analysis-in-python.html
+
+h2. In-progress
+
+* Probabilistic Latent semantic analysis.
+* Latent Dirchlet allocation
+
+h2. Dependencies
+
+* Porter Stemmer - "http://tartarus.org/~martin/PorterStemmer/python.txt":http://tartarus.org/~martin/PorterStemmer/python.txt
+* English stop list - "ftp://ftp.cs.cornell.edu/pub/smart/english.stop":ftp://ftp.cs.cornell.edu/pub/smart/english.stop
+* Scipy -  "http://www.scipy.org/":http://www.scipy.org/
