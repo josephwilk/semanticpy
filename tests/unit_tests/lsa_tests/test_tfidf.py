@@ -29,6 +29,6 @@ class TestTfidf(TestCase):
         expected = numpy.array(expected)
 
         tfidf = Tfidf(matrix)
-        tfidf.transform()
+        new_matrix = tfidf.transform()
 
-        eq_(TestTfidf.same(tfidf.matrix, expected), True)
+        eq_(TestTfidf.same(new_matrix, expected), True)
