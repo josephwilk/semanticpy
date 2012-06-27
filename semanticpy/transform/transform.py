@@ -3,7 +3,7 @@ from scipy import array
 
 class Transform:
     def __init__(self, matrix):
-        self.matrix = array(matrix)
+        self.matrix = array(matrix, dtype=float)
 
     def __repr__(self):
-        MatrixFormatter.new(self.matrix).pretty_print
+        MatrixFormatter(self.matrix).pretty_print

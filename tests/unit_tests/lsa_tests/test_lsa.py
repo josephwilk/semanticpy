@@ -26,6 +26,6 @@ class TestLSA(TestCase):
 
      expected = numpy.array(expected)
      lsa = LSA(matrix)
-     lsa.transform()
+     new_matrix = lsa.transform()
 
-     eq_(TestLSA.same(lsa.matrix, expected), True)
+     eq_(TestLSA.same(new_matrix, expected), True)

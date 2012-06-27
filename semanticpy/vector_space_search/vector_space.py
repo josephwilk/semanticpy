@@ -1,7 +1,13 @@
-from pprint import pprint
 from semanticpy.parser import Parser
+from semanticpy.transform.lsa import LSA
+from semanticpy.transform.tfidf import Tfidf
+from semanticpy.matrix_formatter import MatrixFormatter
+
+from scipy import array
+
 from sets import Set
 import sys
+
 
 try:
 	from numpy import dot
@@ -19,23 +25,46 @@ class VectorSpace:
     collection_of_document_term_vectors = []
     vector_index_to_keyword_mapping = []
 
-    parser=None
+    parser = None
 
-    def __init__(self, documents=[]):
-    	self.collection_of_document_term_vectors=[]
+    def __init__(self, documents = []):
+    	self.collection_of_document_term_vectors = []
     	self.parser = Parser()
-    	if(len(documents)>0):
-    		self.build(documents)
+    	if(len(documents) > 0):
+    		self._build(documents)
 
 
-    def build(self,documents):
+    def related(self, document_id):
+        """ find documents that are related to the document indexed by passed Id within the document Vectors"""
+        ratings = [self._cosine(self.collection_of_document_term_vectors[document_id], document_vector) for document_vector in self.collection_of_document_term_vectors]
+        ratings.sort(reverse=True)
+        return ratings
+
+
+    def search(self, searchList):
+        """ search for documents that match based on a list of terms """
+        queryVector = self._build_query_vector(searchList)
+
+        ratings = [self._cosine(queryVector, documentVector) for documentVector in self.collection_of_document_term_vectors]
+        ratings.sort(reverse=True)
+        return ratings
+
+
+    def _build(self, documents):
     	""" Create the vector space for the passed document strings """
-    	self.vector_index_to_keyword_mapping = self.get_vector_keyword_index(documents)
+    	self.vector_index_to_keyword_mapping = self._get_vector_keyword_index(documents)
 
-    	self.collection_of_document_term_vectors = [self.make_vector(document) for document in documents]
+    	matrix = [self._make_vector(document) for document in documents]
 
+        tfidf = Tfidf(matrix)
+        matrix = tfidf.transform()
 
-    def get_vector_keyword_index(self, document_list):
+        lsa = LSA(matrix)
+        matrix = lsa.transform()
+
+        self.collection_of_document_term_vectors = matrix
+
+    def _get_vector_keyword_index(self, document_list):
     	""" create the keyword associated to the position of the elements within the document vectors """
     	vocabulary_list = self.parser.tokenise_and_remove_stop_words(document_list)
         unique_vocabulary_list = self._remove_duplicates(vocabulary_list)
@@ -49,7 +78,7 @@ class VectorSpace:
     	return vector_index  #(keyword:position)
 
 
-    def make_vector(self, word_string):
+    def _make_vector(self, word_string):
     	""" @pre: unique(vectorIndex) """
 
     	#Initialise vector with 0's
@@ -62,26 +91,11 @@ class VectorSpace:
     	return vector
 
 
-    def build_query_vector(self, term_list):
+    def _build_query_vector(self, term_list):
     	""" convert query string into a term vector """
-    	query = self.make_vector(" ".join(term_list))
+    	query = self._make_vector(" ".join(term_list))
     	return query
 
-
-    def related(self,document_id):
-    	""" find documents that are related to the document indexed by passed Id within the document Vectors"""
-    	ratings = [self._cosine(self.collection_of_document_term_vectors[document_id], document_vector) for document_vector in self.collection_of_document_term_vectors]
-    	ratings.sort(reverse=True)
-    	return ratings
-
-
-    def search(self,searchList):
-    	""" search for documents that match based on a list of terms """
-    	queryVector = self.build_query_vector(searchList)
-
-    	ratings = [self._cosine(queryVector, documentVector) for documentVector in self.collection_of_document_term_vectors]
-    	ratings.sort(reverse=True)
-    	return ratings
 
     def _remove_duplicates(self, list):
         """ remove duplicates from a list """
@@ -92,12 +106,3 @@ class VectorSpace:
     	""" related documents j and q are in the concept space by comparing the vectors :
     		cosine  = ( V1 * V2 ) / ||V1|| x ||V2|| """
     	return float(dot(vector1,vector2) / (norm(vector1) * norm(vector2)))
-
-if __name__ == '__main__':
-	#test data
-	documents = ["The cat in the hat disabled", "A cat is a fine pet ponies.", "Dogs and cats make good pets.","I haven't got a hat."]
-
-	vectorSpace= VectorSpace(documents)
-	pprint(vectorSpace.related(0))
-	pprint(vectorSpace.search(["cat"]))
-

@@ -1,7 +1,11 @@
 from unittest import TestCase
 from semanticpy.vector_space_search.vector_space import VectorSpace
 from semanticpy.transform.lsa import LSA
+from semanticpy.transform.tfidf import Tfidf
+from semanticpy.matrix_formatter import MatrixFormatter
+from scipy import array
 from nose.tools import *
+
 
 class TestSemanticPy(TestCase):
     def setUp(self):
@@ -17,22 +21,23 @@ class TestSemanticPy(TestCase):
 
         eq_(vectorSpace.related(0), [1.0000000000000002, 0.5773502691896258, 0.2886751345948129, 0.2581988897471611])
         
-    def it_should_do_lsa_magic(self):
+    def it_should_do_lsa_magic_test(self):
     	#Example document-term matrix
     	# Vector dimensions: good, pet, hat, make, dog, cat, poni, fine, disabl
-    	matrix=[[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0], 
+    	matrix=array([[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
     		[0.0, 1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 0.0], 
     		[1.0, 1.0, 0.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0], 
-    		[0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]]
+    		[0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]])
 
-    	#Create
-    	lsa = LSA(matrix)
-    	print lsa
 
-    	#Prepare
-    	lsa.tfidfTransform()
-    	print lsa
-	
-    	#Perform
-    	lsa.lsaTransform()
-    	print lsa
+        print MatrixFormatter(matrix).pretty_print()
+
+        tdidf = Tfidf(matrix)
+        matrix = tdidf.transform()
+
+        print MatrixFormatter(matrix).pretty_print()
+
+        lsa = LSA(matrix)
+        matrix = lsa.transform()
+
+        print MatrixFormatter(matrix).pretty_print()
