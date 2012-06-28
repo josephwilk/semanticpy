@@ -1,5 +1,5 @@
 from unittest import TestCase
-from semanticpy.vector_space_search.vector_space import VectorSpace
+from semanticpy.vector_space import VectorSpace
 from semanticpy.transform.lsa import LSA
 from semanticpy.transform.tfidf import Tfidf
 from semanticpy.matrix_formatter import MatrixFormatter
