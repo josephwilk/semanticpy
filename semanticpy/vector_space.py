@@ -50,18 +50,12 @@ class VectorSpace:
         return ratings
 
 
-    def _build(self, documents):
+    def _build(self, documents, transforms = [Tfidf, LSA]):
     	""" Create the vector space for the passed document strings """
     	self.vector_index_to_keyword_mapping = self._get_vector_keyword_index(documents)
 
     	matrix = [self._make_vector(document) for document in documents]
-
-        tfidf = Tfidf(matrix)
-        matrix = tfidf.transform()
-
-        lsa = LSA(matrix)
-        matrix = lsa.transform()
-
+        matrix = reduce(lambda matrix,transform: transform(matrix).transform(), transforms, matrix)
         self.collection_of_document_term_vectors = matrix
 
     def _get_vector_keyword_index(self, document_list):
