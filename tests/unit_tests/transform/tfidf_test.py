@@ -3,7 +3,7 @@ from semanticpy.transform.tfidf import TFIDF
 from nose.tools import *
 import numpy
 
-class TestTFIDF(TestCase):
+class TFIDFTest(TestCase):
     """ """
     EPSILON = 4.90815310617e-09
 
@@ -12,7 +12,7 @@ class TestTFIDF(TestCase):
     def same(self, matrix1, matrix2):
         difference = matrix1 - matrix2
         max = numpy.max(difference)
-        return (max <= TestTFIDF.EPSILON)
+        return (max <= TFIDFTest.EPSILON)
 
 
     def it_should_do_tfidf_test(self):
@@ -31,4 +31,4 @@ class TestTFIDF(TestCase):
         tfidf = TFIDF(matrix)
         new_matrix = tfidf.transform()
 
-        eq_(TestTFIDF.same(new_matrix, expected), True)
+        eq_(TFIDFTest.same(new_matrix, expected), True)

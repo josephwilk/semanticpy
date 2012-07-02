@@ -3,7 +3,7 @@ from semanticpy.vector_space import VectorSpace
 from pprint import pprint
 from nose.tools import *
 
-class TestVectorSpace(TestCase):
+class VectorSpaceTest(TestCase):
 
     documents = ["cat", "cat dog","hat"]
 

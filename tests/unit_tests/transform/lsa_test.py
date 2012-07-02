@@ -3,7 +3,7 @@ from semanticpy.transform.lsa import LSA
 from nose.tools import *
 import numpy
 
-class TestLSA(TestCase):
+class LSATest(TestCase):
    """ """
    EPSILON = 4.90815310617e-09
 
@@ -11,7 +11,7 @@ class TestLSA(TestCase):
    def same(self, matrix1, matrix2):
     difference = matrix1 - matrix2
     max = numpy.max(difference)
-    return (max <= TestLSA.EPSILON)
+    return (max <= LSATest.EPSILON)
 
    def it_should_do_lsa_test(self):
      matrix = [[0.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 1.0],
@@ -28,4 +28,4 @@ class TestLSA(TestCase):
      lsa = LSA(matrix)
      new_matrix = lsa.transform()
 
-     eq_(TestLSA.same(new_matrix, expected), True)
+     eq_(LSATest.same(new_matrix, expected), True)

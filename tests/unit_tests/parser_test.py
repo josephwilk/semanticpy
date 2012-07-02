@@ -2,7 +2,7 @@ from unittest import TestCase
 from semanticpy.parser import Parser
 from nose.tools import *
 
-class TestParser(TestCase):
+class ParserTest(TestCase):
   class FakeStopWords:
     def __init__(self, stop_words=''):
       self.stop_words = stop_words
@@ -11,10 +11,10 @@ class TestParser(TestCase):
       return self.stop_words
 
   def create_parser_with_stopwords(self, words_string):
-    return Parser(TestParser.FakeStopWords(words_string))
+    return Parser(ParserTest.FakeStopWords(words_string))
   
   def create_parser(self):
-    return Parser(TestParser.FakeStopWords())
+    return Parser(ParserTest.FakeStopWords())
     
   def it_should_remove_the_stopwords_test(self):
     parser = self.create_parser_with_stopwords('a')
