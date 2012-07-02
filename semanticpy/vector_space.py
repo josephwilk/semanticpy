@@ -27,11 +27,11 @@ class VectorSpace:
 
     parser = None
 
-    def __init__(self, documents = []):
+    def __init__(self, documents = [], transforms = [Tfidf, LSA]):
     	self.collection_of_document_term_vectors = []
     	self.parser = Parser()
     	if(len(documents) > 0):
-    		self._build(documents)
+    		self._build(documents, transforms)
 
 
     def related(self, document_id):
@@ -50,7 +50,7 @@ class VectorSpace:
         return ratings
 
 
-    def _build(self, documents, transforms = [Tfidf, LSA]):
+    def _build(self, documents, transforms):
     	""" Create the vector space for the passed document strings """
     	self.vector_index_to_keyword_mapping = self._get_vector_keyword_index(documents)
 
