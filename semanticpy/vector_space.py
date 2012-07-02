@@ -1,11 +1,7 @@
 from semanticpy.parser import Parser
 from semanticpy.transform.lsa import LSA
 from semanticpy.transform.tfidf import Tfidf
-from semanticpy.matrix_formatter import MatrixFormatter
 
-from scipy import array
-
-from sets import Set
 import sys
 
 
@@ -30,14 +26,14 @@ class VectorSpace:
     def __init__(self, documents = [], transforms = [Tfidf, LSA]):
     	self.collection_of_document_term_vectors = []
     	self.parser = Parser()
-    	if(len(documents) > 0):
+    	if len(documents) > 0:
     		self._build(documents, transforms)
 
 
     def related(self, document_id):
         """ find documents that are related to the document indexed by passed Id within the document Vectors"""
         ratings = [self._cosine(self.collection_of_document_term_vectors[document_id], document_vector) for document_vector in self.collection_of_document_term_vectors]
-        ratings.sort(reverse=True)
+        ratings.sort(reverse = True)
         return ratings
 
 
@@ -67,15 +63,14 @@ class VectorSpace:
     	offset=0
     	#Associate a position with the keywords which maps to the dimension on the vector used to represent this word
     	for word in unique_vocabulary_list:
-    		vector_index[word]=offset
-    		offset+=1
+    		vector_index[word] = offset
+    		offset += 1
     	return vector_index  #(keyword:position)
 
 
     def _make_vector(self, word_string):
     	""" @pre: unique(vectorIndex) """
 
-    	#Initialise vector with 0's
     	vector = [0] * len(self.vector_index_to_keyword_mapping)
 
     	word_list = self.parser.tokenise_and_remove_stop_words(word_string.split(" "))
@@ -93,7 +88,7 @@ class VectorSpace:
 
     def _remove_duplicates(self, list):
         """ remove duplicates from a list """
-        return Set((item for item in list))
+        return set((item for item in list))
     
         
     def _cosine(self, vector1, vector2):
