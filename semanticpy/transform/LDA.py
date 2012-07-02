@@ -1,4 +1,5 @@
 from semanticpy.transform.transform import Transform
+from vendor.onlineldavb.onlineldavb import OnlineLDA
 
 class LDA(Transform):
     NUMBER_OF_TOPICS = 100
@@ -8,5 +9,5 @@ class LDA(Transform):
         self.document_total = len(self.matrix)
 
     def transform(self):
-        lda = onlineldavb.OnlineLDA(vocab, NUMBER_OF_TOPICS, self.document_total, 1./NUMBER_OF_TOPICS, 1./NUMBER_OF_TOPICS, 1024., 0.7)
+        lda = OnlineLDA(vocab, NUMBER_OF_TOPICS, self.document_total, 1./NUMBER_OF_TOPICS, 1./NUMBER_OF_TOPICS, 1024., 0.7)
 
