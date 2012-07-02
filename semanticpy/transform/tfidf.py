@@ -1,8 +1,7 @@
 from math import *
 from transform import Transform
-from semanticpy.matrix_formatter import MatrixFormatter
 
-class Tfidf(Transform):
+class TFIDF(Transform):
 
     def __init__(self, matrix):
         Transform.__init__(self, matrix)

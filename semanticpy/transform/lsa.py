@@ -4,7 +4,7 @@ from transform import Transform
 
 class LSA(Transform):
     """ Latent Semantic Analysis(LSA).
-	    Apply transforms to a document-term matrix to bring out latent relationships. 
+	    Apply transform to a document-term matrix to bring out latent relationships.
 	    These are found by analysing relationships between the documents and the terms they 
 	    contain.
     """

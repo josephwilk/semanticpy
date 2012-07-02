@@ -1,9 +1,9 @@
 from unittest import TestCase
-from semanticpy.transform.tfidf import Tfidf
+from semanticpy.transform.tfidf import TFIDF
 from nose.tools import *
 import numpy
 
-class TestTfidf(TestCase):
+class TestTFIDF(TestCase):
     """ """
     EPSILON = 4.90815310617e-09
 
@@ -12,7 +12,7 @@ class TestTfidf(TestCase):
     def same(self, matrix1, matrix2):
         difference = matrix1 - matrix2
         max = numpy.max(difference)
-        return (max <= TestTfidf.EPSILON)
+        return (max <= TestTFIDF.EPSILON)
 
 
     def it_should_do_tfidf_test(self):
@@ -28,7 +28,7 @@ class TestTfidf(TestCase):
 
         expected = numpy.array(expected)
 
-        tfidf = Tfidf(matrix)
+        tfidf = TFIDF(matrix)
         new_matrix = tfidf.transform()
 
-        eq_(TestTfidf.same(new_matrix, expected), True)
+        eq_(TestTFIDF.same(new_matrix, expected), True)

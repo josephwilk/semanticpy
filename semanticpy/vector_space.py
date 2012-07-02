@@ -1,6 +1,6 @@
 from semanticpy.parser import Parser
 from semanticpy.transform.lsa import LSA
-from semanticpy.transform.tfidf import Tfidf
+from semanticpy.transform.tfidf import TFIDF
 
 import sys
 
@@ -23,7 +23,7 @@ class VectorSpace:
 
     parser = None
 
-    def __init__(self, documents = [], transforms = [Tfidf, LSA]):
+    def __init__(self, documents = [], transforms = [TFIDF, LSA]):
     	self.collection_of_document_term_vectors = []
     	self.parser = Parser()
     	if len(documents) > 0:
