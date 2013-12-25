@@ -18,15 +18,15 @@ print vector_space.related(0)
 
 ## Supported
 
-* Vector space search - "http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html":http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html
-* Latent semantic analysis - "http://blog.josephwilk.net/projects/latent-semantic-analysis-in-python.html":http://blog.josephwilk.net/projects/latent-semantic-analysis-in-python.html
+* Vector space search - [http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html](http://blog.josephwilk.net/projects/building-a-vector-space-search-engine-in-python.html)
+* Latent semantic analysis - [http://blog.josephwilk.net/projects/latent-semantic-analysis-in-python.html](http://blog.josephwilk.net/projects/latent-semantic-analysis-in-python.html)
 
 
 ## Dependencies
 
-* Porter Stemmer - "http://tartarus.org/~martin/PorterStemmer/python.txt":http://tartarus.org/~martin/PorterStemmer/python.txt
-* English stop list - "ftp://ftp.cs.cornell.edu/pub/smart/english.stop":ftp://ftp.cs.cornell.edu/pub/smart/english.stop
-* Scipy -  "http://www.scipy.org/":http://www.scipy.org/
+* Porter Stemmer - [http://tartarus.org/~martin/PorterStemmer/python.txt](http://tartarus.org/~martin/PorterStemmer/python.txt)
+* English stop list - [ftp://ftp.cs.cornell.edu/pub/smart/english.stop](ftp://ftp.cs.cornell.edu/pub/smart/english.stop)
+* Scipy -  [http://www.scipy.org/](http://www.scipy.org)
 
 #License
 (The MIT License)
